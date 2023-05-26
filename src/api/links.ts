@@ -1,13 +1,14 @@
+import { BASE_URL } from '@/lib/data/constant'
 import axios from 'axios'
 
 export async function getLinks() {
-  const res = await axios.get('http://localhost:3000/api/links')
+  const res = await axios.get(`${BASE_URL}/api/links`)
 
   return res.data
 }
 
 export async function deleteLink(id: string) {
-  const res = await axios.delete(`http://localhost:3000/api/links/${id}`)
+  const res = await axios.delete(`${BASE_URL}/api/links/${id}`)
 
   return res.data
 }
@@ -19,7 +20,7 @@ interface CreateLinkParams {
 }
 
 export async function createLink({ label, content, type }: CreateLinkParams) {
-  const res = await axios.post('http://localhost:3000/api/links', {
+  const res = await axios.post(`${BASE_URL}/api/links`, {
     label,
     content,
     type,
@@ -41,7 +42,7 @@ export async function updateLink({
   content,
   active,
 }: UpdateLinkParams) {
-  const res = await axios.patch(`http://localhost:3000/api/links/${id}`, {
+  const res = await axios.patch(`${BASE_URL}/api/links/${id}`, {
     label,
     content,
     active,

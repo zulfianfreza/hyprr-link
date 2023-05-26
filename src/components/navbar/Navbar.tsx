@@ -92,7 +92,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
                                   @{currentUser?.username}
                                 </h1>
                                 <p className=' text-sm text-gray-500'>
-                                  {process.env.NEXT_PUBLIC_BASE_URL}
+                                  {process.env.NEXT_PUBLIC_BASE_URL}/
                                   {currentUser?.username}
                                 </p>
                               </div>
@@ -116,7 +116,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
                 )}
               </Popover>
               <Link
-                href={`${process.env.NEXT_PUBLIC_BASE_URL}${currentUser?.username}`}
+                href={`${process.env.NEXT_PUBLIC_BASE_URL}/${currentUser?.username}`}
                 target='_blank'
                 className=' px-4 py-2 text-sm pr-5 rounded-full bg-violet-700 flex h-10 font-semibold items-center gap-x-2 text-white cursor-pointer hover:bg-violet-600'
               >

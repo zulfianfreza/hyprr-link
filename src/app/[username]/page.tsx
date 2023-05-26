@@ -17,8 +17,10 @@ interface IParams {
 export async function generateMetadata({ params }: IParams) {
   const user = await getUserByUsername(params.username)
 
+  const title = user?.profileTitle ? user.profileTitle : user?.name
+
   return {
-    title: `${user?.profileTitle} - hyprr`,
+    title: `${title} - hyprr`,
   }
 }
 

@@ -10,7 +10,7 @@ import {
   plusJakartaSans,
   poppins,
   spaceMono,
-} from '@/lib/constants/font'
+} from '@/lib/data/font'
 import HyprrLinks from '../HyprrLinks'
 import Avatar from '../Avatar'
 import Logo from '../navbar/Logo'

@@ -27,7 +27,7 @@ export default function DashboardScreen() {
           <div className=' w-full h-full flex flex-col gap-y-4 justify-center items-center'>
             <p>Loading...</p>
           </div>
-        ) : links.length === 0 ? (
+        ) : links && links.length === 0 ? (
           <div className=' w-full h-full flex flex-col gap-y-4 justify-center items-center'>
             <Logo className=' filter grayscale opacity-25' />
             <p className=' text-center font-bold text-gray-400 leading-tight'>

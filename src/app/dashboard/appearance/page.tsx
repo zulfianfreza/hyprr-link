@@ -16,9 +16,6 @@ import React from 'react'
 
 export const metadata: Metadata = {
   title: 'Appearance',
-  openGraph: {
-    title: 'Appearance',
-  },
 }
 
 export default async function AppearancePage() {

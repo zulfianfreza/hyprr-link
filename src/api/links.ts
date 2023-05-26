@@ -1,0 +1,51 @@
+import axios from 'axios'
+
+export async function getLinks() {
+  const res = await axios.get('http://localhost:3000/api/links')
+
+  return res.data
+}
+
+export async function deleteLink(id: string) {
+  const res = await axios.delete(`http://localhost:3000/api/links/${id}`)
+
+  return res.data
+}
+
+interface CreateLinkParams {
+  label: string
+  content: string
+  type: string
+}
+
+export async function createLink({ label, content, type }: CreateLinkParams) {
+  const res = await axios.post('http://localhost:3000/api/links', {
+    label,
+    content,
+    type,
+  })
+
+  return res.data
+}
+
+interface UpdateLinkParams {
+  id: string
+  label?: string
+  content?: string
+  active?: boolean
+}
+
+export async function updateLink({
+  id,
+  label,
+  content,
+  active,
+}: UpdateLinkParams) {
+  const res = await axios.patch(`http://localhost:3000/api/links/${id}`, {
+    label,
+    content,
+    active,
+  })
+
+  return res.data
+}

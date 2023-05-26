@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+model Account {
+    id                String  @id @default(auto()) @map("_id") @db.ObjectId
+    userId            String  @db.ObjectId
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String?
+    access_token      String?
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String?
+    session_state     String?
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([provider, providerAccountId])
+}
+
+model Session {
+    id           String   @id @default(auto()) @map("_id") @db.ObjectId
+    sessionToken String   @unique
+    userId       String   @db.ObjectId
+    expires      DateTime
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+    id            String    @id @default(auto()) @map("_id") @db.ObjectId
+    name          String?
+    email         String?   @unique
+    emailVerified DateTime?
+    image         String?
+    username      String?
+    profileTitle  String?
+    bio           String?
+
+    accounts Account[]
+    sessions Session[]
+    Links    Links[]
+    Theme    Theme?
+}
+
+model Links {
+    id      String  @id @default(auto()) @map("_id") @db.ObjectId
+    type    String
+    label   String
+    content String
+    active  Boolean
+    userId  String? @db.ObjectId
+
+    user User? @relation(fields: [userId], references: [id])
+}
+
+model Theme {
+    id                  String      @id @default(auto()) @map("_id") @db.ObjectId
+    userId              String?     @unique @db.ObjectId
+    backgroundType      String
+    backgroundPrimary   String?
+    backgroundSecondary String?
+    fontFamily          String?
+    fontColor           String?
+    buttonType          ButtonType? @default(fill)
+    buttonColor         String?
+    buttonFontColor     String?
+    shadowColor         String?
+
+    user User? @relation(fields: [userId], references: [id])
+}
+
+enum ButtonType {
+    fill
+    fillrounded
+    fillroundedfull
+    outline
+    outlinerounded
+    outlineroundedfull
+    softshadow
+    softshadowrounded
+    softshadowroundedfull
+    hardshadow
+    hardshadowrounded
+    hardshadowroundedfull
+}

@@ -11,15 +11,15 @@ import { refetchProfile } from '@/lib/hotReloadIframe'
 import Avatar from '../Avatar'
 
 interface TabProfileProps {
-  user: User
+  user?: User | null
 }
 
 export default function TabProfile({ user }: TabProfileProps) {
   const router = useRouter()
   const [profileTitle, setProfileTitle] = useState(
-    user.profileTitle ? user.profileTitle : `@${user.username}`
+    user?.profileTitle ? user.profileTitle : `@${user?.username}`
   )
-  const [bio, setBio] = useState(user.bio ? user.bio : '')
+  const [bio, setBio] = useState(user?.bio ? user.bio : '')
 
   const handleUpdateProfile = useCallback(async () => {
     const res = await axios.patch('/api/user', { profileTitle, bio })
@@ -33,7 +33,7 @@ export default function TabProfile({ user }: TabProfileProps) {
   }, [router, profileTitle, bio])
 
   const onBlurProfileTitle = () => {
-    if (profileTitle === user.profileTitle) return null
+    if (profileTitle == user?.profileTitle) return null
     handleUpdateProfile()
   }
 
@@ -44,7 +44,7 @@ export default function TabProfile({ user }: TabProfileProps) {
   }
 
   const onBlurBio = () => {
-    if (bio === user.bio) return null
+    if (bio == user?.bio) return null
     handleUpdateProfile()
   }
 
@@ -56,7 +56,7 @@ export default function TabProfile({ user }: TabProfileProps) {
       <div className=' p-6 bg-white rounded-[24px] mt-2'>
         <div className='flex gap-x-4'>
           {/* <div className=' h-24 w-24 rounded-full bg-gray-900'></div> */}
-          <Avatar src={user.image} className=' w-24 h-24' />
+          <Avatar src={user?.image} className=' w-24 h-24' />
           <div className=' flex flex-col flex-1 gap-y-2'>
             <div className=' w-full h-12 flex text-sm justify-center cursor-pointer hover:bg-violet-800 rounded-full items-center text-white font-semibold bg-violet-700'>
               <p>Choose an image</p>

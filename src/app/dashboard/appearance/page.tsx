@@ -11,7 +11,6 @@ import TabButtons from '@/components/tab/TabButtons'
 import TabFonts from '@/components/tab/TabFonts'
 import TabProfile from '@/components/tab/TabProfile'
 import TabThemes from '@/components/tab/TabThemes'
-import { hotReloadIframe, refetchTheme } from '@/lib/hotReloadIframe'
 import { Metadata } from 'next'
 import React from 'react'
 
@@ -58,7 +57,7 @@ export default async function AppearancePage() {
           ))}
         </TabsList>
         <TabsContent value='profile'>
-          <TabProfile user={currentUser!} />
+          <TabProfile user={currentUser} />
         </TabsContent>
         <TabsContent value='themes'>
           <TabThemes theme={theme} />

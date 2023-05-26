@@ -5,7 +5,7 @@ export async function getTheme() {
   //   try {
   const currentUser = await getCurrentUser()
 
-  const theme = await db.theme.findUnique({
+  const theme = await db.theme.findFirst({
     where: {
       userId: currentUser?.id,
     },
